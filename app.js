@@ -13,10 +13,10 @@ var graph = require('fbgraph');
 // this should really be in a config file!
 // facebook configuration file
 var conf = {
-    client_id:      '176524962546904'
-  , client_secret:  '6e701a88b5a0f15b734e8cdc92abf5b9'
-  , scope:          'email, user_about_me, friends_about_me, user_birthday, friends_birthday, user_education_history, friends_education_history, user_hometown, friends_hometown, user_interests, friends_interests, user_likes, friends_likes, user_location, friends_location, user_photos, friends_photos, user_relationships, friends_relationships, user_relationship_details, friends_relationship_details, user_work_history, friends_work_history, read_friendlists,user_relationships'
-  , redirect_uri:   'http://foodbot.azurewebsites.net/auth/facebook'
+    client_id:      process.env.FACEBOOKAPPID || '11111111111111',
+    client_secret:  process.env.FACEBOOKAPPSECRET || '1111111111111111',
+    scope:          'email, user_about_me, friends_about_me, user_birthday, friends_birthday, user_education_history, friends_education_history, user_hometown, friends_hometown, user_interests, friends_interests, user_likes, friends_likes, user_location, friends_location, user_photos, friends_photos, user_relationships, friends_relationships, user_relationship_details, friends_relationship_details, user_work_history, friends_work_history, read_friendlists,user_relationships',
+    redirect_uri:   'http://foodbot.azurewebsites.net/auth/facebook'
 };
 
 var routes = require('./routes');
