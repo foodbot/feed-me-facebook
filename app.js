@@ -15,7 +15,7 @@ var graph = require('fbgraph');
 var conf = {
     client_id:      process.env.FACEBOOKAPPID || '11111111111111',
     client_secret:  process.env.FACEBOOKAPPSECRET || '1111111111111111',
-    scope:          '',
+    scope:          'user_events, friend_events',
     redirect_uri:   'http://foodbot.azurewebsites.net/auth/facebook'
 };
 
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
 app.get('/', function(req, res){
-  res.render('index', { title: 'latif' });
+  res.render('index', { title: 'Foodbot' });
 });
 // app.get('/users', users.list);
 
@@ -49,9 +49,9 @@ app.get('/auth/facebook', function(req, res) {
   // so we'll redirect to the oauth dialog
   if (!req.query.code) {
     var authUrl = graph.getOauthUrl({
-        "client_id":     conf.client_id
-      , "redirect_uri":  conf.redirect_uri
-      , "scope":         conf.scope
+        "client_id":     conf.client_id,
+        "redirect_uri":  conf.redirect_uri,
+        "scope":         conf.scope
     });
 
     if (!req.query.error) { //checks whether a user denied the app facebook login/permissions
