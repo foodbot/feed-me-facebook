@@ -78,7 +78,7 @@ app.get('/auth/facebook', function(req, res) {
     // // var oneUser = res;
     // // myDataRef.set({name: res.name, text: res.birthday});
     // });
-    res.redirect('http://www.foodbot.io');
+    res.redirect('http://www.foodbot.io/#/#');
   });
 });
 
