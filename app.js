@@ -99,13 +99,12 @@ app.get('/auth/facebook', function(req, res) {
         console.log("BODY:", body);
         db.facebookTokens.findOne({userid: body.id})
         .then(function(entry){
-          var item = {userid: body.id, token: token};
           if(!entry){
-            db.facebookTokens.insert(item);
+            db.facebookTokens.insert({userid: body.id, token: token, createdAt: new Date()});
             console.log("Inserted new token!");
           }else{
             console.log("Updating token..");
-            db.facebookTokens.update({userid: body.id}, item);
+            db.facebookTokens.update({userid: body.id}, {$set:{token: token}});
           }
         });
       });
