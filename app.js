@@ -83,7 +83,7 @@ app.get('/auth/facebook', function(req, res) {
       "client_secret":  conf.client_secret,
     }, function (err, facebookRes) {
       console.log("RES:", facebookRes);
-      console.log("Token:", graph.getAccessToken);
+      console.log("Token:", graph.getAccessToken());
       res.redirect('http://www.foodbot.io/#/#');
     });
   });
