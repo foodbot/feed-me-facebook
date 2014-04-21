@@ -87,7 +87,7 @@ app.get('/auth/facebook', function(req, res) {
       console.log("RES:", facebookRes);
       console.log("Token:", token);
       graph.get("/me", function(err,body){
-        console.log("BODY:", JSON.stringify(body));
+        console.log("BODY:", body);
         db.facebookTokens.findOne({userid: body.id})
         .then(function(entry){
           var item = {userid: body.id, token: token};
