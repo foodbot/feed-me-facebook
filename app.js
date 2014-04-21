@@ -49,9 +49,9 @@ app.get('/auth/facebook', function(req, res) {
   // so we'll redirect to the oauth dialog
   if (!req.query.code) {
     var authUrl = graph.getOauthUrl({
-        "client_id":     conf.client_id,
-        "redirect_uri":  conf.redirect_uri,
-        "scope":         conf.scope
+      "client_id":     conf.client_id,
+      "redirect_uri":  conf.redirect_uri,
+      "scope":         conf.scope
     });
 
     if (!req.query.error) { //checks whether a user denied the app facebook login/permissions
@@ -78,7 +78,14 @@ app.get('/auth/facebook', function(req, res) {
     // // var oneUser = res;
     // // myDataRef.set({name: res.name, text: res.birthday});
     // });
-    res.redirect('http://www.foodbot.io/#/#');
+    graph.extendAccessToken({
+      "client_id":      conf.client_id,
+      "client_secret":  conf.client_secret,
+    }, function (err, facebookRes) {
+      console.log("RES:", facebookRes);
+      console.log("Token:", graph.getAccessToken);
+      res.redirect('http://www.foodbot.io/#/#');
+    });
   });
 });
 
