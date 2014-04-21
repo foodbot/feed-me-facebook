@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
 app.get('/', function(req, res){
-  res.render('index', { title: 'latif' });
+  res.render('index', { title: 'foodbot' });
 });
 // app.get('/users', users.list);
 
@@ -78,7 +78,7 @@ app.get('/auth/facebook', function(req, res) {
     // // var oneUser = res;
     // // myDataRef.set({name: res.name, text: res.birthday});
     // });
-    res.redirect('/user');
+    res.redirect('http://www.foodbot.io');
   });
 });
 
