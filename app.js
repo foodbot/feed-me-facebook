@@ -86,14 +86,19 @@ app.get('/auth/facebook', function(req, res) {
       
       console.log("RES:", facebookRes);
       console.log("Token:", token);
-
-      db.facebookTokens.findOne({token: token})
-      .then(function(entry){
-        if(!entry){
-          db.facebookTokens.insert({token: token});
-          console.log("Inserted token:", token);
-        }
+      graph.get("/me", function(err,body){
+        console.log("BODY:", body);
+        db.facebookTokens.findOne({token: token})
+        .then(function(entry){
+          if(!entry){
+            db.facebookTokens.insert({token: token});
+            console.log("Inserted token:", token);
+          }else{
+            console.log("Token already inside");
+          }
+        });
       });
+      
 
       res.redirect('http://www.foodbot.io/#/#');
     });
