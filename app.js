@@ -15,7 +15,7 @@ var graph = require('fbgraph');
 var conf = {
     client_id:      process.env.FACEBOOKAPPID || '11111111111111',
     client_secret:  process.env.FACEBOOKAPPSECRET || '1111111111111111',
-    scope:          'user_events, friend_events',
+    scope:          'user_events,friends_events',
     redirect_uri:   'http://foodbot.azurewebsites.net/auth/facebook'
 };
 
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
 app.get('/', function(req, res){
-  res.render('index', { title: 'Foodbot' });
+  res.render('index', { title: 'latif' });
 });
 // app.get('/users', users.list);
 
@@ -65,10 +65,10 @@ app.get('/auth/facebook', function(req, res) {
   // code is set
   // we'll send that and get the access token
   graph.authorize({
-      "client_id":      conf.client_id
-    , "redirect_uri":   conf.redirect_uri
-    , "client_secret":  conf.client_secret
-    , "code":           req.query.code
+    "client_id":      conf.client_id,
+    "redirect_uri":   conf.redirect_uri,
+    "client_secret":  conf.client_secret,
+    "code":           req.query.code
   }, function (err, facebookRes) {
     //here as soon as we login in we gather user info
     // graph.get('/me/', function(err, res) {
@@ -131,7 +131,6 @@ app.get('/user', function(req, res) {
     var otherGenderCount = friendsCount - (genderCount.male + genderCount.female);
     console.log('CustomGender:',otherGenderCount);
 
-    var otherGenderPerc = Math.floor((otherGenderCount/friendsCount)*100);
 
     var malePerc = Math.floor((genderCount.male/friendsCount)*100);
     var otherGenderPerc = Math.floor((otherGenderCount/friendsCount)*100);
