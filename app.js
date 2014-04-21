@@ -15,7 +15,7 @@ var db = pmongo(process.env.MONGOURL, ['facebookTokens']);
 var conf = {
     client_id:      process.env.FACEBOOKAPPID || '11111111111111',
     client_secret:  process.env.FACEBOOKAPPSECRET || '1111111111111111',
-    scope:          'user_events,friends_events',
+    scope:          '',//'user_events,friends_events',
     redirect_uri:   'http://foodbot.azurewebsites.net/auth/facebook'
 };
 
