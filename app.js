@@ -36,6 +36,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
+setInterval(function(){
+  db.runCommand({ping:1})
+  .then(function(res) {
+    if(res.ok){ 
+      console.log("We're still up!");
+    }
+  });
+}, 3000);
+
 app.get('/', function(req, res){
   res.render('index', { title: 'foodbot' });
 });
