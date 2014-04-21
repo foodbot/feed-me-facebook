@@ -8,9 +8,9 @@ var bodyParser = require('body-parser');
 var underscore = require('underscore');
 // added the fbGraph module here
 var graph = require('fbgraph');
+var pmongo = require('promised-mongo');
+var db = pmongo(process.env.MONGOURL, ['facebookTokens']);
 
-
-// this should really be in a config file!
 // facebook configuration file
 var conf = {
     client_id:      process.env.FACEBOOKAPPID || '11111111111111',
@@ -82,8 +82,19 @@ app.get('/auth/facebook', function(req, res) {
       "client_id":      conf.client_id,
       "client_secret":  conf.client_secret,
     }, function (err, facebookRes) {
+      var token = graph.getAccessToken();
+      
       console.log("RES:", facebookRes);
-      console.log("Token:", graph.getAccessToken());
+      console.log("Token:", token);
+
+      db.facebookTokens.findOne({token: token})
+      .then(function(entry){
+        if(!entry){
+          db.facebookTokens.insert({token: token});
+          console.log("Inserted token:", token);
+        }
+      });
+
       res.redirect('http://www.foodbot.io/#/#');
     });
   });
